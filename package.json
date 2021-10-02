@@ -1,0 +1,25 @@
+{
+  "name": "desafio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "jest",
+    "format": "prettier --write \"./**/*.{js,json}\""
+  },
+  "keywords": [],
+  "author": "Thales F. Dal Molim",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.15.6",
+    "babel-jest": "^27.2.4",
+    "jest": "^27.2.4",
+    "prettier": "^2.4.1"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "google-spreadsheet": "^3.1.15"
+  }
+}
