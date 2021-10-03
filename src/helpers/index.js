@@ -21,7 +21,7 @@ export const validateGrades = (averageGrade) => {
   }
 };
 
-export const remainingGradeForApproval = (approvalStatus, averageGrade) => {
+export const getRemainingGradeForApproval = (approvalStatus, averageGrade) => {
   if (approvalStatus == "Exame Final") {
     return Math.ceil(100 - averageGrade);
   } else {

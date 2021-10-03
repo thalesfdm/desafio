@@ -43,7 +43,7 @@ export default class StudentAPI {
   }
 
   getNumberOfClasses() {
-    return this.#rows[0]._rawData[0].slice(28);
+    return parseInt(this.#rows[0]._rawData[0].slice(28).trim());
   }
 
   getStudents() {
@@ -71,10 +71,13 @@ export default class StudentAPI {
       const averageGrade = helpers.getAverageGrade(student);
       approvalStatus = helpers.validateGrades(averageGrade);
 
-      const naf = helpers.remainingGradeForApproval(approvalStatus, averageGrade);
+      const remainingGradeForApproval = helpers.getRemainingGradeForApproval(
+        approvalStatus,
+        averageGrade
+      );
 
       student["Situação"] = approvalStatus;
-      student["Nota para Aprovação Final"] = naf;
+      student["Nota para Aprovação Final"] = remainingGradeForApproval;
       await student.save();
 
       console.log(`  > ${student["Aluno"].trimEnd()} - ${approvalStatus}`);
