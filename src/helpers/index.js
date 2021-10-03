@@ -1,3 +1,9 @@
+/**
+ * Helper functions to separate business logic from
+ * the API main concern which is to access and manipulate
+ * GoogleSpreadsheet data
+ */
+
 export const validateAbsence = (student, numberOfClasses) => {
   const absenceLimit = numberOfClasses * 0.25;
   const absence = parseInt(student["Faltas"]);

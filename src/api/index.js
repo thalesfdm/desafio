@@ -11,9 +11,7 @@ export default class StudentAPI {
   #rows;
 
   constructor() {
-    this.#doc = new GoogleSpreadsheet(
-      process.env.SHEET_ID || "1NzAbiToHGwo-2xgXx3xVNsG4dOp-0eltEDo4DlmQ6To"
-    );
+    this.#doc = new GoogleSpreadsheet(process.env.SHEET_ID);
     this.#rows = [];
   }
 
@@ -25,6 +23,10 @@ export default class StudentAPI {
 
     await this.#doc.loadInfo();
 
+    /**
+     * headerValues should be set this way, do not try to use
+     * sheet.setHeaderRow() as it overwrites the original table
+     */
     const sheet = this.#doc.sheetsByIndex[0];
     sheet.headerValues = [
       "Matricula",
@@ -42,6 +44,9 @@ export default class StudentAPI {
     console.log("> Document loaded.");
   }
 
+  /**
+   * e.g: "Total de aulas no semestre: 60" = 60
+   */
   getNumberOfClasses() {
     return parseInt(this.#rows[0]._rawData[0].slice(28).trim());
   }
@@ -50,6 +55,10 @@ export default class StudentAPI {
     return this.#rows.slice(2);
   }
 
+  /**
+   * Process each student row validating absence rate and grades
+   * via helper functions and then saving it at the original table
+   */
   async processStudents() {
     console.log(" > Processing student data...");
 
