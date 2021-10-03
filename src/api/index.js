@@ -11,7 +11,9 @@ export default class StudentAPI {
   #rows;
 
   constructor() {
-    this.#doc = new GoogleSpreadsheet(process.env.SHEET_ID);
+    this.#doc = new GoogleSpreadsheet(
+      process.env.SHEET_ID || "1NzAbiToHGwo-2xgXx3xVNsG4dOp-0eltEDo4DlmQ6To"
+    );
     this.#rows = [];
   }
 
@@ -36,6 +38,8 @@ export default class StudentAPI {
     ];
 
     this.#rows = await sheet.getRows();
+
+    console.log("> Document loaded.");
   }
 
   getNumberOfClasses() {
@@ -47,6 +51,8 @@ export default class StudentAPI {
   }
 
   async processStudents() {
+    console.log(" > Processing student data...");
+
     const numberOfClasses = this.getNumberOfClasses();
     const students = this.getStudents();
 
@@ -57,6 +63,8 @@ export default class StudentAPI {
         student["Situação"] = approvalStatus;
         student["Nota para Aprovação Final"] = 0;
         await student.save();
+
+        console.log(`  > ${student["Aluno"].trimEnd()} - ${approvalStatus}`);
         continue;
       }
 
@@ -68,6 +76,18 @@ export default class StudentAPI {
       student["Situação"] = approvalStatus;
       student["Nota para Aprovação Final"] = naf;
       await student.save();
+
+      console.log(`  > ${student["Aluno"].trimEnd()} - ${approvalStatus}`);
     }
+
+    console.table(
+      students.map((student) => {
+        return {
+          "Aluno": student["Aluno"],
+          "Situação": student["Situação"],
+          "Nota para Aprovação Final": student["Nota para Aprovação Final"],
+        };
+      })
+    );
   }
 }
