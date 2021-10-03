@@ -1,6 +1,40 @@
 # Desafio
 
 Aplicação capaz de ler uma planilha do google sheets, buscar as informações necessárias, calcular e escrever o resultado na planilha.
+A planilha consiste em uma tabela de alunos com suas respectivas notas e faltas. Deve-se calcular a situação de cada aluno baseando-se no
+número de faltas e na média das três provas, seguindo as seguintes regras:
+
+<table>
+  <thead>
+    <tr>
+      <th>Regra</th>
+      <th>Situação</th>
+      <th>Nota para Aprovação Final</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Faltas > 25%</td>
+      <td>Reprovado por Falta</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Média < 5</td>
+      <td>Reprovado por Nota</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>5 <= Média < 7</td>
+      <td>Exame Final</td>
+      <td>5 <= (Média + NAF) / 2</td>
+    </tr>
+    <tr>
+      <td>Média >= 7</td>
+      <td>Aprovado</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Requisitos
 - [Git](https://git-scm.com)
