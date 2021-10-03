@@ -38,7 +38,7 @@ número de faltas e na média das três provas, seguindo as seguintes regras:
 
 ## Requisitos
 - [Git](https://git-scm.com)
-- [Node.js](https://nodejs.org)
+- [Node.js](https://nodejs.org) >= 12
 - [npm](https://www.npmjs.com)
 - Conta na [Google Cloud Platform](https://cloud.google.com)
 
